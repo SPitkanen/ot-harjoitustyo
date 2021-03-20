@@ -8,3 +8,5 @@
 [komentorivi.txt](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
 *Vielä loppuun oma muutos*
+
+jotain tekstiä
