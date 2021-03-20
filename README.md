@@ -5,3 +5,6 @@
 **Testinä vielä linkin luominen tälle** [github-sivulle](https://github.com/SPitkanen/ot-harjoitustyo)
 
 Toivottavasti toimii!
+
+Toimihan se
+
