@@ -1,0 +1,105 @@
+commit 66bb0040a1f7190bc562f0b170e98eda0b385b41
+Author: Santeri Pitkänen <santeripitkanen@84-253-241-132.bb.dnainternet.fi>
+Date:   Sat Mar 20 17:23:44 2021 +0200
+
+    muutoksia
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 10858411d1aaeaf90aa10e49d07cc4c64675097d
+Author: Santeri Pitkänen <santeripitkanen@84-253-241-132.bb.dnainternet.fi>
+Date:   Sat Mar 20 17:19:33 2021 +0200
+
+    uusia tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 7b762dfadf448d94c839d33d61d856413f9e547d
+Author: Santeri Pitkänen <santeripitkanen@84-253-241-132.bb.dnainternet.fi>
+Date:   Sat Mar 20 17:09:01 2021 +0200
+
+    muutoksia
+
+ eka.txt    | 1 -
+ kolmas.txt | 2 +-
+ 2 files changed, 1 insertion(+), 2 deletions(-)
+
+commit ad66547c8d675709f1c4fe8a3177ad2765fbdec7
+Author: Santeri Pitkänen <santeripitkanen@84-253-241-132.bb.dnainternet.fi>
+Date:   Sat Mar 20 17:06:14 2021 +0200
+
+    nimen muutos
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 0bb0c7eb996cc16aba7c644e05d6756af6d8031a
+Author: Santeri Pitkänen <santeripitkanen@84-253-241-132.bb.dnainternet.fi>
+Date:   Sat Mar 20 17:04:35 2021 +0200
+
+    poistettu toinen.txt
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit b864bb7400c00e23fcfb7cc569c5424492431444
+Author: Santeri Pitkänen <santeripitkanen@84-253-241-132.bb.dnainternet.fi>
+Date:   Sat Mar 20 17:03:11 2021 +0200
+
+    muokattu
+
+ tiedosto.txt | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+commit 7bb0cc0778c78c19e4e714e788e8f1f7939b7dd3
+Author: Santeri Pitkänen <santeripitkanen@84-253-241-132.bb.dnainternet.fi>
+Date:   Sat Mar 20 16:39:19 2021 +0200
+
+    luotu kansio stuff ja tiedosto joku.txt
+
+ stuff/jokin.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 7899dd99a6e879c121bd92845da188dd734b5a20
+Author: Santeri Pitkänen <santeripitkanen@84-253-241-132.bb.dnainternet.fi>
+Date:   Sat Mar 20 16:36:48 2021 +0200
+
+    muutokset tiedostoihin toinen.txt ja kolmas.txt
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit 0d1c13a17596df2b97af8a7d28b194b258bdf0b6
+Author: Santeri Pitkänen <santeripitkanen@84-253-241-132.bb.dnainternet.fi>
+Date:   Sat Mar 20 16:35:20 2021 +0200
+
+    luotiin kolmas.txt
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 6ba6021b5f7961c56c7b5e3443c32ad0ad7ee474
+Author: Santeri Pitkänen <santeripitkanen@84-253-241-132.bb.dnainternet.fi>
+Date:   Sat Mar 20 16:31:31 2021 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 94db672d25f9fe9b6d044db6ea7af14e45e7da35
+Author: Santeri Pitkänen <santeripitkanen@84-253-241-132.bb.dnainternet.fi>
+Date:   Sat Mar 20 16:28:13 2021 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
