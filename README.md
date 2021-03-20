@@ -1,10 +1,8 @@
-# Viikon1 harjoitus
+# Ohjelmistotekniikka, harhoitustyö
 
-*Tässä harjoituksessa opeteltiin markdown-notaatiota*
+## Tehtävät
 
-**Testinä vielä linkin luominen tälle** [github-sivulle](https://github.com/SPitkanen/ot-harjoitustyo)
+### Viikko 1
+[gitlog.txt](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
 
-Toivottavasti toimii!
-
-Toimihan se
 
