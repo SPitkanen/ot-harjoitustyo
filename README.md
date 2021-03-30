@@ -10,3 +10,6 @@
 *Vielä loppuun oma muutos*
 
 jotain tekstiä
+
+### Viikko 2
+[tyoaikakirjanpito.md](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
