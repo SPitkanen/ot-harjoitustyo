@@ -4,3 +4,5 @@
 /laskarit/viikko2/Unicafe/nbproject/
 .DS_Store
 WeightAndBalance/target
+/WeightAndBalance/nbproject/
+WeightAndBalance/nbactions.xml
