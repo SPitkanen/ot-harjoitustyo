@@ -13,11 +13,12 @@ jotain tekstiä
 
 
 ### Viikko 2
-[tyoaikakirjanpito.md](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+[Työaikakirjanpito](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
 
 
 ### Viikko3
-[tyoaikakirjanpito.md](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+[Työaikakirjanpito](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+
 [Laskarit viikko 3](https://github.com/SPitkanen/ot-harjoitustyo/tree/master/laskarit/viikko3)
 
 Sovelluksella on nyt karkea pohja ja massalaskelma onnistuu, tulosten näyttäminen on kuitenkin vielä vaiheessa. 
