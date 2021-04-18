@@ -7,25 +7,25 @@ import java.sql.*;
  *
  * @author santeripitkanen
  */
-public class acDataDao {
+public class AcDataDao {
     
     private Connection db;
     
-    public acDataDao() {
-        createConnection();
+    public AcDataDao(Connection db) {
+        this.db = db;
     }
     
     public ResultSet getAcData(int planeId) throws SQLException {
         String query = "SELECT item, arm, weight, moment, maxweight FROM acData WHERE acid = ? ORDER BY id ASC";
-        PreparedStatement s = db.prepareStatement(query);
+        PreparedStatement s = this.db.prepareStatement(query);
         s.setInt(1, planeId);
         ResultSet rs = s.executeQuery();
         return rs;
     }
     
     public ResultSet getAcDataDepend(int planeId) throws SQLException {
-        String query = "SELECT item, arm, weight, moment, maxweight, section FROM acDataDepend WHERE acid = ? ORDER BY id ASC";
-        PreparedStatement s = db.prepareStatement(query);
+        String query = "SELECT item, arm, weight, moment, maxweight, section, operation FROM acDataDepend WHERE acid = ? ORDER BY id ASC";
+        PreparedStatement s = this.db.prepareStatement(query);
         s.setInt(1, planeId);
         ResultSet rs = s.executeQuery();
         return rs;
@@ -33,7 +33,7 @@ public class acDataDao {
     
     public int getCount(int planeId) throws SQLException {
         String query = "SELECT COUNT(acid) FROM acData WHERE acid = ?";
-        PreparedStatement s = db.prepareStatement(query);
+        PreparedStatement s = this.db.prepareStatement(query);
         s.setInt(1, planeId);
         ResultSet rs = s.executeQuery();
         rs.next();
@@ -43,7 +43,7 @@ public class acDataDao {
     
     public int getCountDepend(int planeId) throws SQLException { 
         String query2 = "SELECT COUNT(acid) FROM acDataDepend WHERE acid = ?";
-        PreparedStatement s2 = db.prepareStatement(query2);
+        PreparedStatement s2 = this.db.prepareStatement(query2);
         s2.setInt(1, planeId);
         ResultSet rs2 = s2.executeQuery();
         rs2.next();
@@ -51,13 +51,34 @@ public class acDataDao {
         return count;
     }
     
-    public void createConnection() {
-        try {
-            db = DriverManager.getConnection("jdbc:postgresql:weightandbalance");
-        } catch (SQLException e) {
-            System.out.println("Virhe tietokannassa: " + e);
-        }
-        
-        
+    public ResultSet getAircrafts() throws SQLException {
+        String query = "SELECT id, type, register FROM aircraft ORDER BY register";
+        PreparedStatement s = this.db.prepareStatement(query);
+        ResultSet rs = s.executeQuery();
+        return rs;
+    }
+    
+    public ResultSet getChart(int planeId) throws SQLException {
+        String query = "SELECT xstart, xstop, ystart, ystop, xspacing, yspacing FROM wbtemplate WHERE planeid=?";
+        PreparedStatement s = this.db.prepareStatement(query);
+        s.setInt(1, planeId);
+        ResultSet rs = s.executeQuery();
+        return rs;
+    }
+    
+    public ResultSet getEnvelope(int planeId) throws SQLException {
+        String query = "SELECT x, y, FROM wbenvelope WHERE planeid=?";
+        PreparedStatement s = this.db.prepareStatement(query);
+        s.setInt(1, planeId);
+        ResultSet rs = s.executeQuery();
+        return rs;
+    }
+    
+    public ResultSet getEnvelopeCount(int planeId) throws SQLException {
+        String query = "SELECT COUNT(*) FROM wbenvelope WHERE planeid=?";
+        PreparedStatement s = this.db.prepareStatement(query);
+        s.setInt(1, planeId);
+        ResultSet rs = s.executeQuery();
+        return rs;
     }
 }

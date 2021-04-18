@@ -5,12 +5,12 @@
  */
 
 import java.sql.*;
-import wbapp.ui.wbUi;
+import wbapp.ui.Ui;
 
 public class WeightAndBalance {
     
     public static void main(String[] args) throws SQLException {
-        wbUi ui = new wbUi();
-        ui.start();
+        Ui ui = new Ui();
+        ui.main(args);
     }
 }

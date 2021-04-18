@@ -2,6 +2,9 @@
 package wbapp.domain;
 
 import java.util.ArrayList;
+import wbapp.dao.AcDataDao;
+import java.sql.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,7 +15,7 @@ public class Aircraft {
     private String acType;
     private String acRegister;
     
-    public Aircraft(int acId, String acType, String acRegister, Double BasicWeight) {
+    public Aircraft(int acId, String acType, String acRegister) {
         this.acId = acId;
         this.acType = acType;
         this.acRegister = acRegister;
@@ -29,5 +32,9 @@ public class Aircraft {
     public String getAcRegister() {
         return this.acRegister;
     }
+    
+    @Override
+    public String toString() {
+        return this.getAcRegister();
+    }
 }
-

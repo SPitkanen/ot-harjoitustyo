@@ -12,8 +12,13 @@
 jotain tekstiä
 
 
-### Viikko 2
-[Työaikakirjanpito](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+### Viikko 4
+
+
+
+Jo aikaisemmin toteutetut toiminnot siirrettiin javafx projektiin ja siihen luotiin alustava graafinen käyttöliittymä. Kirjautuminen toimii ja sovellus luo kirjauduttuaan weight and balance lomakkeen taulukon ja massalaskelman kuvaajan pohjan. Konetta pystyy vaihtamaan valikosta. Asetteluun tai käytettävyyteen ei ole vielä kiinnitetty sen eenempää huomiota. Laskenta toimi hienosti tekstikäyttöliittymällä, mutta sen toteutus graafisesti toi eteensä taas yhden hankalan pulman jota pitänee tulla selvittämään pajaan myöhemmin.
+
+Sovelluksesta puuttuu tällä hetkellä vielä (em. mainitun lisäksi) mahdollisuus uuden käyttäjän luomiseen sekä täytetyn kaavakkeen tallentaminen. 
 
 
 ### Viikko3
@@ -30,3 +35,7 @@ Omina havaintoina suurimmat puutteet/parannettavat asiat tällä hetkellä:
 * Testauksen lisääminen helpottamaan laskennan kanssa
 
 Seuraavaksi vuorossa toteutettujen ominaisuuksien parantelua ja uusien luomista.
+
+
+### Viikko 2
+[Työaikakirjanpito](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
