@@ -1,0 +1,1 @@
+![]~/dokumentaatio/kuvat/Luokkakaavio.jpg
