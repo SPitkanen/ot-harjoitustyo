@@ -1,7 +1,7 @@
 # Ohjelmistotekniikka, harhoitustyö
 
 ## Dokumentaatio
-
+[Arkkitehtuurikuvaus](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
 ## Tehtävät
 
