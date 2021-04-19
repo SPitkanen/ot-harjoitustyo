@@ -1,1 +1,1 @@
-![]~/dokumentaatio/kuvat/Luokkakaavio.jpg
+![]~/kuvat/Luokkakaavio.jpg
