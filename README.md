@@ -6,6 +6,17 @@
 
 ## Tehtävät
 
+## Viikko 5
+
+Sovellukseen pystyy nyt kirjautumaan ja luomaan uuden käyttäjätunnuksen. Kirjautumisen jälkeen käyttäjä näkee kaavakkeen valmiina täytettäväksi, oletusarvona on listan ensimmäinen lentokone, konetta voi vaihtaa valikosta. Mikäli käyttäjä antaa liian suuria tai pieniä arvoja, ohjelma muuttaa yli (tai ali) menevän massan punaiseksi ja ilmoittaa sallitut rajat. Kuvaajaan piirtyvät massakeskipisteen sallitut rajat ja pienempi viiva kuvaa massakeskipisteen muutosta lennon aikana.
+
+Toimiakseen sovellus vaatii postgres-tietokannan nimeltä 'weightandbalance' ja testejä varten tietokannan 'wbtest'. Taulut ja referenssiarvot voi kopioida suoraan [tästä](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/WeightAndBalance/referenceValues.txt).
+Ohjelman voi suorittaa komennolla 'java -jar WeightandBalance-1.0-SNAPSHOT.jar
+'.
+
+Arkkitehtuurikuvauksesta löytyvä sekvenssikaavio kuvaa sovelluksen käynnistyessä Ui:n suorittamaa init-metodia.
+
+
 ### Viikko 4
 
 
