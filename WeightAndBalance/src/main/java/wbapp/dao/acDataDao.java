@@ -67,7 +67,7 @@ public class AcDataDao {
     }
     
     public ResultSet getEnvelope(int planeId) throws SQLException {
-        String query = "SELECT x, y, FROM wbenvelope WHERE planeid=?";
+        String query = "SELECT x, y FROM wbenvelope WHERE planeid=?";
         PreparedStatement s = this.db.prepareStatement(query);
         s.setInt(1, planeId);
         ResultSet rs = s.executeQuery();
@@ -75,7 +75,7 @@ public class AcDataDao {
     }
     
     public ResultSet getEnvelopeCount(int planeId) throws SQLException {
-        String query = "SELECT COUNT(*) FROM wbenvelope WHERE planeid=?";
+        String query = "SELECT COUNT(id) AS count FROM wbenvelope WHERE planeid=?";
         PreparedStatement s = this.db.prepareStatement(query);
         s.setInt(1, planeId);
         ResultSet rs = s.executeQuery();

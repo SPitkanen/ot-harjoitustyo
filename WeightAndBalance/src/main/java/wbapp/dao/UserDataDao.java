@@ -25,12 +25,11 @@ public class UserDataDao {
     }
     
     public ResultSet newUser(String name, String password) throws SQLException {
-        String query = "INSERT INTO users (name, password, role, visible VALUES (?, ?, 0, 1) RETURNING id";
+        String query = "INSERT INTO users (name, password, role, visible) VALUES (?, ?, 0, 1) RETURNING id";
         PreparedStatement s = this.db.prepareStatement(query);
         s.setString(1, name);
         s.setString(2, password);
-        s.executeUpdate();
-        ResultSet rs = s.getResultSet();
+        ResultSet rs = s.executeQuery();
         return rs;
     }
     

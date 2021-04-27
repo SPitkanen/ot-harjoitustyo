@@ -47,9 +47,9 @@ public class User {
         return false;
     }
     
-    public boolean checkPasswordExist(String name) {
+    public boolean checkPasswordExist(String password) {
         try {
-            ResultSet rs = this.userdata.checkName(name);
+            ResultSet rs = this.userdata.checkName(password);
             rs.next();
             int id = rs.getInt("id");
             if (id > 0) {
@@ -57,6 +57,25 @@ public class User {
             }
         } catch (SQLException e) {
             return false;
+        }
+        return false;
+    }
+    
+    public boolean signup(String name, String password) {
+        if (checkNameExist(name) || checkPasswordExist(password)) {
+            return false;
+        } else {
+            try {
+                ResultSet rs = this.userdata.newUser(name, password);
+                rs.next();
+                int id = rs.getInt("id");
+                System.out.println(id);
+                if (id > 0) {
+                    return true;
+                }
+            } catch (SQLException e) {
+                return false;
+            }
         }
         return false;
     }

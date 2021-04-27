@@ -1,0 +1,47 @@
+CREATE TABLE aircraft (id SERIAL PRIMARY KEY, type TEXT, register TEXT);
+
+CREATE TABLE users (id SERIAL PRIMARY KEY, name TEXT, password TEXT, role INTEGER, visible INTEGER);
+
+CREATE TABLE acData (id SERIAL PRIMARY KEY, acid INTEGER REFERENCES aircraft (id), item TEXT, arm DECIMAL, weight DECIMAL, moment DECIMAL, maxweight DECIMAL);
+
+CREATE TABLE acDataDepend (id SERIAL PRIMARY KEY, acid INTEGER REFERENCES aircraft (id), item TEXT, arm DECIMAL, weight DECIMAL, moment DECIMAL, maxweight DECIMAL, section INTEGER, operation INTEGER); 
+
+CREATE TABLE wbtemplate (id SERIAL PRIMARY KEY, planeId INTEGER REFERENCES aircraft(id), xstart DECIMAL, xstop DECIMAL, ystart DECIMAL, ystop DECIMAL, xspacing DECIMAL, yspacing DECIMAL);
+
+CREATE TABLE wbenvelope (id SERIAL PRIMARY KEY, planeId INTEGER REFERENCES aircraft(id), x DECIMAL, y DECIMAL);
+
+INSERT INTO aircraft (type, register) VALUES ('C152', 'OH-NNN');
+
+INSERT INTO users (name, password, role, visible) VALUES ('user', 'user', 0, 1);
+ 
+INSERT INTO acData (acid, item, arm, weight, moment, maxweight) VALUES (1, 'BASIC WEIGHT', 31.05, 1245.6, 386.80, 1245.6);
+
+INSERT INTO acData (acid, item, arm, weight, moment, maxweight) VALUES (1, 'ZERO FUEL WEIGHT', NULL, NULL, NULL, 1675);
+
+INSERT INTO acData (acid, item, arm, weight, moment, maxweight) VALUES (1, 'RAMP WEIGHT', NULL, NULL, NULL, 1675.00);
+
+INSERT INTO acData (acid, item, arm, weight, moment, maxweight) VALUES (1, 'TAKE OFF WEIGHT', NULL, NULL, NULL, 1670);
+
+INSERT INTO acData (acid, item, arm, weight, moment, maxweight) VALUES (1, 'LANDING WEIGHT', NULL, NULL, NULL, 1670);
+
+
+INSERT INTO acDataDepend (acid, item, arm, weight, moment, maxweight, section, operation) VALUES (1, 'SEAT 1 & 2', 41.00, NULL, NULL, 429.4, 1, 1);
+
+INSERT INTO acDataDepend (acid, item, arm, weight, moment, maxweight, section, operation) VALUES (1, 'BAGGAGE COMPARTMENT 1', 64.00, NULL, NULL, 429.4, 1, 1);
+
+INSERT INTO acDataDepend (acid, item, arm, weight, moment, maxweight, section, operation) VALUES (1, 'BAGGAGE COMPARTMENT 2', 84.00, NULL, NULL, 429.4, 1, 1);
+
+INSERT INTO acDataDepend (acid, item, arm, weight, moment, maxweight, section, operation) VALUES (1, 'FUEL', 39.50, NULL, NULL, 225.00, 2, 1);
+
+INSERT INTO acDataDepend (acid, item, arm, weight, moment, maxweight, section, operation) VALUES (1, 'TAXI FUEL', 39.50, NULL, NULL, 225, 3, 0);
+
+INSERT INTO acDataDepend (acid, item, arm, weight, moment, maxweight, section, operation) VALUES (1, 'TRIP FUEL', 39.50, NULL, NULL, 225, 4, 0);
+
+INSERT INTO wbenvelope (planeid, x, y) VALUES (1, 31, 1000);
+INSERT INTO wbenvelope (planeid, x, y) VALUES (1, 31, 1350);
+INSERT INTO wbenvelope (planeid, x, y) VALUES (1, 32.75, 1675);
+INSERT INTO wbenvelope (planeid, x, y) VALUES (1, 36.5, 1675);
+INSERT INTO wbenvelope (planeid, x, y) VALUES (1, 36.5, 1000);
+
+INSERT INTO wbtemplate (planeid, xstart, xstop, ystart, ystop, xspacing, yspacing) VALUES (1, 30, 38, 1000, 1800, 2, 100);
+

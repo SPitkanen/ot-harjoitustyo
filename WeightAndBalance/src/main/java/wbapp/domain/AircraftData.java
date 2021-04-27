@@ -22,6 +22,7 @@ public class AircraftData {
     private ArrayList<String> items;
     private ArrayList<String> itemsAcDependant;
     private ArrayList<String> fullList;
+    private int coordinateCount;
     
     public AircraftData(AcDataDao acData, int planeId) {
         this.acData = acData;
@@ -115,14 +116,15 @@ public class AircraftData {
         }
     }
     
-    public boolean addWeights(double weight, int i) {
-        i += dataList2[i][4];
-        if (weight < 0 || weight > dataList3[i][3]) {
-            System.out.println("Painon tulee olla vähintään 0 ja enintään " + dataList[i][3] + "!");
-            return false;
-        } 
+    public void addWeights(double weight, int i) {
         dataList3[i][1] = weight;
-        return true;
+    }
+    
+    public boolean checkWeight(double weight, int i) {
+        if (weight < dataList3[i][3] && weight >= 0) {
+            return true;
+        }
+        return false;
     }
     
     public void createFullItemList() {
@@ -155,11 +157,13 @@ public class AircraftData {
     }
     
     public double[][] getEnvelopeData(int planeId) throws SQLException {
-        ResultSet rs = acData.getChart(planeId);
+        ResultSet rs = acData.getEnvelope(planeId);
         ResultSet rs2 = acData.getEnvelopeCount(planeId);
-        int count = rs2.getInt("COUNT(*)");
+        while (rs2.next()) {
+            coordinateCount = rs2.getInt("count");
+        }
         int i = 0;
-        double[][] envelopeData = new double[count][2];
+        double[][] envelopeData = new double[coordinateCount][2];
         while (rs.next()) {
             envelopeData[i][0] = rs.getDouble("x");
             envelopeData[i][1] = rs.getDouble("y");
@@ -168,8 +172,16 @@ public class AircraftData {
         return envelopeData;
     }
     
+    public int getCoordinateCount(int planeId) throws SQLException {
+        return coordinateCount;
+    }
+    
     public double[][] getData() {
         return dataList3;
+    }
+    
+    public void setData(double[][] lista) {
+        dataList3 = lista;
     }
     
     public double getmaxWeight(int a) {

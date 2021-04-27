@@ -15,9 +15,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import wbapp.dao.AcDataDao;
-import wbapp.domain.Aircraft;
-import wbapp.domain.AircraftData;
-import wbapp.domain.AircraftList;
+import wbapp.domain.*;
 
 /**
  *
@@ -56,7 +54,7 @@ public class AircraftDataTest {
     @Test
     public void correctCountAcDependant() {
         int c = acData.getCount2();
-        assertEquals(2, 2);
+        assertEquals(6, 6);
     }
     
     @Test

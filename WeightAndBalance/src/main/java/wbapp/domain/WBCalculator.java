@@ -14,12 +14,13 @@ public class WBCalculator {
     private int index;
     private int count;
     
-    public WBCalculator(double[][] data, int count) {
-        this.data = data;
-        this.count = count;
+    public WBCalculator() {
+        
     }
     
-    public double[][] calculateData() {
+    public double[][] calculateData(double[][] data, int count) {
+        this.data = data;
+        this.count = count;
         double weight = this.data[0][1];
         double moment = this.data[0][2];
         for (int i = 1; i < count; i++) {
