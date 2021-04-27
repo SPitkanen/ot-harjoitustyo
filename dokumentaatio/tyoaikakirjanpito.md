@@ -6,3 +6,6 @@ Päivä | Aika | Mitä tein?
 16.4 | 4 | Laskennan jatkamista tekstikäyttöliittymällä
 17.4 | 10 | Laskenta toimii kunnolla tekstikäyttöliittymässä, uuden projektin luominen javafx:n avulla
 18.4 | 10 | Graafisen käyttöliittymän rakentamista, kirjautumisen toteutus ja wb taulukon ja kuvaajan pohjan luominen
+25.4 | 5 | Graafisen käyttöliittymän korjausta
+26.4 | 6 | Edellisen päivän jatko + Ui:n jaottelu metodeihin ja uuden tunnuksen luominen kuntoon
+27.4 | 6 | Testauksen lsiääminen, viikkotehtävien tekemistä
