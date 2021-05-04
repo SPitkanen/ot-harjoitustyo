@@ -1,10 +1,36 @@
 # Ohjelmistotekniikka, harhoitustyö
 
+Työn tarkoituksena on toteuttaa sovellus, jolla voi laskea yleisilmailukoneen massakeskipisteen.
+Sovelluksen käyttäjä pystyy:
+
+* Kirjautumaan sovellukseen tai luomaan uuden tunnuksen
+* Täyttämään ja laskemaan kaavakkeet tietokantaan tallennetuille koneille
+* Tallentamaan täytetyn kaavakkeen ja tarkastelemaan aikaisempia kaavakkeita
+
 ## Dokumentaatio
 
 [Arkkitehtuurikuvaus](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+[Työaikakirjanpito](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+[Vaatimusmäärittely](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmäärittely.md)
+[Käyttöohje](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
+
+[Release 2](https://github.com/SPitkanen/ot-harjoitustyo/releases/tag/Viikko6)
+[Release 1](https://github.com/SPitkanen/ot-harjoitustyo/releases/tag/viikko5)
+
+Testiraportin suoritus: ==mvn test jacoco:report==
+Jarin generointi: ==mvn package==
+Checkstyletarkastus: ==mvn jxr:jxr checkstyle:checkstyle==
+JavaDoc: ==mvn javadoc:javadoc==
 
 ## Tehtävät
+
+[Laskarit](https://github.com/SPitkanen/ot-harjoitustyo/tree/master/laskarit)
+
+## Viikko 6
+
+Sovellus on nyt toimintojensa puolesta valmis. Koodi kuitenkin kaipaisi reilusti siistimistä ja selkeyttämistä, ehkä myös jonkin verran rakenteellisia muutoksia. Tällä hetkellä esimerkiksi wbapp.ui:n luokka Ui sisältää jonkin verran turhaa toistoa.
+
+Myös dokumentaatiota ja testausta pitää vielä kasvattaa. Tämänhetkisen käyttöohjeen löydät [täältä](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
 ## Viikko 5
 
