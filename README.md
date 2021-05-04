@@ -17,7 +17,10 @@ Sovelluksen käyttäjä pystyy:
 [Release 2](https://github.com/SPitkanen/ot-harjoitustyo/releases/tag/Viikko6)
 [Release 1](https://github.com/SPitkanen/ot-harjoitustyo/releases/tag/viikko5)
 
-
+Testiraportin suoritus: mvn test jacoco:report
+Jarin generointi: mvn package
+Checkstyletarkastus: mvn jxr:jxr checkstyle:checkstyle
+JavaDoc: mvn javadoc:javadoc
 
 ## Tehtävät
 
