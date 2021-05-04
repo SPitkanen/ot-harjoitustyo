@@ -4,8 +4,8 @@ Sovelluksen käynnistyessä käyttäjälle avautuu kirjautumisnäkymä ja samall
 
 Onnistuneen kirjautumisen jälkeen käyttäjälle avautuu massabalanssikaavake valmiina täytettäväksi.
 Yläpalkin napeista pääsee liikkumaan jokolomakkeeseen, tai listaan tallennetuista lennoista.
-[referenssiarvoja](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/WeightAndBalance/referenceValues.txt) käyttämällä näkymä on kutakuinkin seuraavanlainen
-Ylempään taulukkoon syötetään halutut massat ja calculate-napilla arvot saa laskettua. Kuvaajaan piirtyy massakeskipisteen vaihtelu lennon aikana.
+[Referenssiarvoja](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/WeightAndBalance/referenceValues.txt) käyttämällä näkymä on kutakuinkin seuraavanlainen.
+Ylempään taulukkoon syötetään halutut massat ja calculate-napilla arvot saa laskettua, alempaan kuvaajaan piirtyy massakeskipisteen vaihtelu lennon aikana.
 Käyttäjä voi halutessaan tallentaa lasketun kaavakkeen.
 
 ![input scene](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/wbappWBInput.png)
