@@ -40,7 +40,7 @@ Myös dokumentaatiota ja testausta pitää vielä kasvattaa. Tämänhetkisen kä
 
 Sovellukseen pystyy nyt kirjautumaan ja luomaan uuden käyttäjätunnuksen. Kirjautumisen jälkeen käyttäjä näkee kaavakkeen valmiina täytettäväksi, oletusarvona on listan ensimmäinen lentokone, konetta voi vaihtaa valikosta. Mikäli käyttäjä antaa liian suuria tai pieniä arvoja, ohjelma muuttaa yli (tai ali) menevän massan punaiseksi ja ilmoittaa sallitut rajat. Kuvaajaan piirtyvät massakeskipisteen sallitut rajat ja pienempi viiva kuvaa massakeskipisteen muutosta lennon aikana.
 
-Toimiakseen sovellus vaatii postgres-tietokannan nimeltä 'weightandbalance' ja testejä varten tietokannan 'wbtest'. Taulut ja referenssiarvot voi kopioida suoraan [tästä](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/WeightAndBalance/referenceValues.txt).
+Toimiakseen sovellus vaatii postgres-tietokannan nimeltä 'weightandbalance' ja testejä varten tietokannan 'wbtest'. Taulut ja referenssiarvot voi kopioida suoraan [tästä](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/referenceValues.txt).
 Ohjelman voi suorittaa komennolla 'java -jar WeightandBalance-1.0-SNAPSHOT.jar
 '.
 
