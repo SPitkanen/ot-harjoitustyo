@@ -10,11 +10,15 @@ Sovelluksen käyttäjä pystyy:
 ## Dokumentaatio
 
 [Arkkitehtuurikuvaus](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
 [Työaikakirjanpito](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/tyoaikakirjanpito.md)
+
 [Vaatimusmäärittely](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/vaatimusmäärittely.md)
+
 [Käyttöohje](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
 [Release 2](https://github.com/SPitkanen/ot-harjoitustyo/releases/tag/Viikko6)
+
 [Release 1](https://github.com/SPitkanen/ot-harjoitustyo/releases/tag/viikko5)
 
 Testiraportin suoritus: mvn test jacoco:report
