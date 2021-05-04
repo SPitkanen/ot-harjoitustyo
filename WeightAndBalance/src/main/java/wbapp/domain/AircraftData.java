@@ -3,14 +3,14 @@ package wbapp.domain;
 
 import java.sql.*;
 import java.util.ArrayList;
-import wbapp.dao.AcDataDao;
+import wbapp.dao.AircraftDataDao;
 /**
  *
  * @author santeripitkanen
  */
 public class AircraftData {
     
-    private AcDataDao acData;
+    private AircraftDataDao acData;
     private double[][] dataList;
     private double[][] dataList2;
     private double[][] dataList3;
@@ -23,8 +23,10 @@ public class AircraftData {
     private ArrayList<String> itemsAcDependant;
     private ArrayList<String> fullList;
     private int coordinateCount;
+    private int planeId;
     
-    public AircraftData(AcDataDao acData, int planeId) {
+    public AircraftData(AircraftDataDao acData, int planeId) {
+        this.planeId = planeId;
         this.acData = acData;
         try {
             this.rs = this.acData.getAcData(planeId);
@@ -44,7 +46,12 @@ public class AircraftData {
         createFullDataList();
         createFullItemList();
     }
-
+    
+    /**
+    * Method creates a matrice from all of the intermediate steps that are mostly the same for all aircraft.
+    * (Basic Weight, Ramp Weight etc.) Items (Basic Weight etc.) are added to a ArrayList and matrice is created from doubles.
+    *
+    */
     public void createDataList() {
         int i = 0;
         try {
@@ -62,6 +69,11 @@ public class AircraftData {
         } 
     }
     
+    /**
+    * Method creates a double matrice from all of the steps that are dependant on the aircraft type and not same for all aircraft.
+    * (Seat confiqurations etc.) Items are added to ArrayList
+    *
+    */
     public void createDataListDepend() {
         int i = 0;
         try {
@@ -79,6 +91,11 @@ public class AircraftData {
             System.out.println("Virhe: " + e);
         }
     }
+    
+    /**
+    * Method combines previously created matrices to full data set.
+    *
+    */
     public void createFullDataList() {
         dataList3[0][0] = dataList[0][0];
         dataList3[0][1] = dataList[0][1];
@@ -120,6 +137,14 @@ public class AircraftData {
         dataList3[i][1] = weight;
     }
     
+    /**
+    * Method checks that user inputs are not negative and they do not exceed maxweight for given section.
+    *
+    * @param weight user input weight
+    * @param i row number on full data matrice
+    * 
+    * @return thruth function of the operation
+    */
     public boolean checkWeight(double weight, int i) {
         if (weight < dataList3[i][3] && weight >= 0) {
             return true;
@@ -127,6 +152,10 @@ public class AircraftData {
         return false;
     }
     
+    /**
+    * Combines previously created item lists to full list.
+    *
+    */
     public void createFullItemList() {
         int p = 1;
         int k = 0;
@@ -142,6 +171,13 @@ public class AircraftData {
         }
     }
     
+    /**
+    * Method recieves ResultSet from dao, values are used for chart x and y axis.
+    *
+    * @param planeId id number of the plane 
+    * 
+    * @return chart values
+    */
     public double[][] getChartData(int planeId) throws SQLException {
         ResultSet rs = acData.getChart(planeId);
         double[][] chartData = new double[1][6];
@@ -156,6 +192,15 @@ public class AircraftData {
         return chartData;
     }
     
+    /**
+    * Recieves aircraft flight envelope limits from db as coordinates.
+    * values are used to draw chart envelope limits.
+    * 
+    * @param  planeId aircraft id number
+    * 
+    * @return envelope limit values 
+    *
+    */
     public double[][] getEnvelopeData(int planeId) throws SQLException {
         ResultSet rs = acData.getEnvelope(planeId);
         ResultSet rs2 = acData.getEnvelopeCount(planeId);
@@ -172,6 +217,22 @@ public class AircraftData {
         return envelopeData;
     }
     
+    /**
+    * Method creates new data matrice to be stored in results. Values are checked for under and overweight and other than double values.
+    * return value from dao method saveData is returned.
+    * 
+    * @param userId current users id value
+    *
+    */
+    public boolean saveData(int userId) {
+        for (int i = 0; i < getCount(); i++) {
+            if (dataList3[i][1] < 0 || dataList3[i][1] > dataList3[i][3] || Double.isNaN(dataList3[i][1])) {
+                return false;
+            }
+        }
+        return acData.saveData(dataList3, this.fullList, this.planeId, userId, getCount());
+    }
+    
     public int getCoordinateCount(int planeId) throws SQLException {
         return coordinateCount;
     }
@@ -180,8 +241,8 @@ public class AircraftData {
         return dataList3;
     }
     
-    public void setData(double[][] lista) {
-        dataList3 = lista;
+    public void setData(double[][] list) {
+        dataList3 = list;
     }
     
     public double getmaxWeight(int a) {

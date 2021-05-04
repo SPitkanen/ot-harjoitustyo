@@ -1,25 +1,25 @@
 
 package wbapp.domain;
 
-import java.util.ArrayList;
-import wbapp.dao.AcDataDao;
-import wbapp.domain.Aircraft;
 import java.sql.*;
-import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import wbapp.dao.AcDataDao;
+import wbapp.dao.AircraftDataDao;
 /**
  *
  * @author santeripitkanen
  */
 public class AircraftList {
-    private AcDataDao acData;
+    private AircraftDataDao acData;
     
-    public AircraftList(AcDataDao acData) {
+    public AircraftList(AircraftDataDao acData) {
         this.acData = acData;
     }
     
+    /**
+    * Method creates list from all aircraft stored in database.
+    *
+    */
     public ObservableList<Aircraft> getAcNameList() {
         ObservableList<Aircraft> planes = FXCollections.observableArrayList();
         int i = 0;

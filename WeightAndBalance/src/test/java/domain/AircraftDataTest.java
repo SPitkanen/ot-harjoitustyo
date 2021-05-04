@@ -14,7 +14,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import wbapp.dao.AcDataDao;
+import wbapp.dao.AircraftDataDao;
 import wbapp.domain.*;
 
 /**
@@ -24,7 +24,7 @@ import wbapp.domain.*;
 public class AircraftDataTest {
     
     Connection db;
-    AcDataDao data;
+    AircraftDataDao data;
     AircraftData acData;
     
     public AircraftDataTest() {
@@ -39,7 +39,7 @@ public class AircraftDataTest {
         } catch (SQLException e) {
             System.out.println("Virhe tietokannassa");
         }
-        data = new AcDataDao(db);
+        data = new AircraftDataDao(db);
         acData = new AircraftData(data, 1);
         
     }
@@ -47,32 +47,40 @@ public class AircraftDataTest {
     @Test
     public void correctCount() {
         int c = acData.getCount();
-        assertEquals(5, 5);
+        assertEquals(c, 11);
     }
     
     // Checking count for items that are not standard, but might depend on the aircraft selected
     @Test
     public void correctCountAcDependant() {
         int c = acData.getCount2();
-        assertEquals(6, 6);
+        assertEquals(c, 6);
     }
     
     @Test
     public void addWeightsWorksCorrectWeight() {
         acData.addWeights(40, 0);
-        assertEquals(true, true);
+        double list[][] = acData.getData();
+        double x = list[0][1];
+        assertEquals(40, 40);
     }
     
     @Test
-    public void addWeightsDoesNotWorkOverWeight() {
-        acData.addWeights(2000, 0);
-        assertEquals(false, false);
+    public void checkWeightDoesNotWorkOverWeight() {
+        boolean x = acData.checkWeight(20000, 0);
+        assertEquals(x, false);
     }
     
     @Test
-    public void addWeightsDoesNotWorkNegativeWeight() {
-        acData.addWeights(-10, 0);
-        assertEquals(false, false);
+    public void checkWeightDoesNotWorkNegativeWeight() {
+        boolean x = acData.checkWeight(-10, 0);
+        assertEquals(x, false);
+    }
+    
+    @Test
+    public void checkWeightWorksCorrectWeight() {
+        boolean x = acData.checkWeight(30, 1);
+        assertEquals(x, true);
     }
 
     

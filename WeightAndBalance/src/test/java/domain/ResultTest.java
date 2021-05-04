@@ -14,24 +14,24 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import wbapp.domain.*;
 import wbapp.dao.*;
+import wbapp.domain.*;
 
 /**
  *
  * @author santeripitkanen
  */
-public class WBCalculatorTest {
+public class ResultTest {
     
-    WBCalculator calc;
     Connection db;
     AircraftDataDao data;
     AircraftData acData;
     Results results;
     
-    public WBCalculatorTest() {
+    public ResultTest() {
         
     }
+    
     
     @Before
     public void setUp() {
@@ -42,18 +42,24 @@ public class WBCalculatorTest {
         }
         data = new AircraftDataDao(db);
         acData = new AircraftData(data, 1);
-        this.calc = new WBCalculator();
+        
+        results = new Results(data, 1); 
     }
     
     @Test
-    public void correctMoment() {
-        double d = this.calc.calculateMoment(39.5, 139.26);
-        assertEquals(d, 55.01, 0.01);
+    public void correctLogCount() {
+        results.getLogCount("2021-05-02T13:43:44.810114Z", 1);
+        assertEquals(2, 2);
     }
     
     @Test
-    public void correctArm() {
-        double d = this.calc.calculateArm(1562.74, 527.55);
-        assertEquals(d, 33.75, 0.01);
+    public void correctResultCount() {
+        results.resultCount(1);
+    }
+    
+    @Test
+    public void getDataWorks() {
+        String[][] items = results.getLogData("2021-05-02T13:43:44.810114Z", 1);
+        assertEquals(items[1][0], "SEAT 1 & 2");
     }
 }

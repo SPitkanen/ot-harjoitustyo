@@ -34,7 +34,7 @@ public class Ui extends Application {
     private AircraftList acList;
     private Scene loginScene;
     private Scene mainScene;
-    private AcDataDao acData;
+    private AircraftDataDao acData;
     private Aircraft plane;
     private double[][] acDataList;
     private AircraftData data;
@@ -44,12 +44,14 @@ public class Ui extends Application {
     private WBCalculator calculator;
     private ComboBox<Aircraft> cbox;
     private Button calcButton;
+    private Button saveButton;
     private BorderPane borderPane;
     private TextField userName;
     private PasswordField pswdText;
     private Stage primaryStage;
     private Label loginMessage;
     private LineChart<Number, Number> chartTemplate;
+    private Results results;
     
     @Override
     public void init() throws Exception {
@@ -59,7 +61,7 @@ public class Ui extends Application {
         UserDataDao usrData = new UserDataDao(db);
         this.user = new User(usrData);
         
-        acData = new AcDataDao(db);
+        acData = new AircraftDataDao(db);
         this.acList = new AircraftList(acData);
         
         calculator = new WBCalculator();
@@ -172,14 +174,22 @@ public class Ui extends Application {
     }
     
     public void initWBSheet() {
+        results = new Results(acData, this.user.getUserId());
+        
         grid = new GridPane();
         
         cbox = new ComboBox<>();
         cbox.setItems(this.acList.getAcNameList());
         cbox.getSelectionModel().selectFirst();
         
+        saveButton = new Button("Save");
+        saveButton.setOnAction(e -> {
+            if (data.saveData(this.user.getUserId()) == true) {
+                
+            }
+        });
+        
         calcButton = new Button("Calculate");
-        grid.add(calcButton, 5, count + 2);
         calcButton.setOnAction(e -> {
             ObservableList<Node> nodes = grid.getChildren();
             for (Node node : nodes) {
@@ -222,6 +232,7 @@ public class Ui extends Application {
         grid.add(arm, 1, 1);
         grid.add(weight, 2, 1);
         grid.add(moment, 3, 1);
+        grid.add(saveButton, 2, count + 2);
         grid.add(calcButton, 3, count + 2);
         double[] lista = new double[count];
         for (int i = 0; i < count; i++) {
@@ -266,10 +277,9 @@ public class Ui extends Application {
                 envelope.getData().add(new XYChart.Data<>(coordinates[i][0], coordinates[i][1]));
             }
             XYChart.Series<Number, Number> envelope2 = new XYChart.Series<>();
-            envelope2.getData().add(new XYChart.Data<>(acDataList[4][0], acDataList[4][1]));
-            envelope2.getData().add(new XYChart.Data<>(acDataList[8][0], acDataList[8][1]));
-            envelope2.getData().add(new XYChart.Data<>(acDataList[10][0], acDataList[10][1]));
-            //envelope.getData().add(new XYChart.Data<>(coordinates[0][0], coordinates[0][1]));
+            envelope2.getData().add(new XYChart.Data<>(acDataList[items.indexOf("ZERO FUEL WEIGHT")][0], acDataList[items.indexOf("ZERO FUEL WEIGHT")][1]));
+            envelope2.getData().add(new XYChart.Data<>(acDataList[items.indexOf("TAKE OFF WEIGHT")][0], acDataList[items.indexOf("TAKE OFF WEIGHT")][1]));
+            envelope2.getData().add(new XYChart.Data<>(acDataList[items.indexOf("LANDING WEIGHT")][0], acDataList[items.indexOf("LANDING WEIGHT")][1]));
             chartTemplate.getData().add(envelope);
             chartTemplate.getData().add(envelope2);
             chartTemplate.setCreateSymbols(false);
@@ -278,11 +288,120 @@ public class Ui extends Application {
         }
     }
     
+    public HBox topBar() {
+        HBox top = new HBox();
+        Button wb = new Button("WB");
+        Button log = new Button("Flight log");
+        
+        wb.setOnAction(e -> {
+            redrawWBSheet();
+        });
+        
+        log.setOnAction(e -> {
+            drawAllResults();
+        });
+        
+        top.getChildren().addAll(wb, log);
+        
+        return top;
+    }
+    
+    public void drawAllResults() {
+        BorderPane borderPane = new BorderPane();
+        HBox top = topBar();
+        borderPane.setTop(top);
+        
+        GridPane grid = new GridPane();
+        String[][] items = this.results.getResults();
+        for (int i = 0; i < this.results.resultCount(this.user.getUserId()); i++) {
+            Button button = new Button(items[i][0] + "    " + items[i][1]);
+            grid.add(button, 0, i);
+            final String date = items[i][2];
+            final Integer acId = Integer.valueOf(items[i][3]);
+            button.setOnAction(e -> {
+                drawFlightLog(date, acId);
+            });
+        }
+        borderPane.setCenter(grid);
+        showScene(borderPane);
+    }
+    
+    public void drawFlightLog(String date, int acId) {
+        BorderPane borderPane = new BorderPane();
+        
+        HBox top = topBar();
+        borderPane.setTop(top);
+        
+        Label item = new Label("ITEM");
+        Label arm = new Label("ARM in");
+        Label weight = new Label("WEIGHT lbs");
+        Label moment = new Label("MOM/100");
+        
+        GridPane grid = new GridPane();
+  
+        grid.add(item, 0, 0);
+        grid.add(arm, 1, 0);
+        grid.add(weight, 2, 0);
+        grid.add(moment, 3, 0);
+        
+        String[][] values = this.results.getLogData(date, this.user.getUserId());
+        int count = this.results.getLogCount(date, this.user.getUserId());
+        for (int i = 0; i < count; i++) {
+            Label itemLabel = new Label(values[i][0]);
+            Label armLabel = new Label(values[i][1]);
+            Label weightLabel = new Label(values[i][2]);
+            Label momentLabel = new Label(values[i][3]);
+            
+            grid.add(itemLabel, 0, i + 1);
+            grid.add(armLabel, 1, i +1);
+            grid.add(weightLabel, 2, i +1);
+            grid.add(momentLabel, 3, i +1);
+        }
+        borderPane.setCenter(grid);
+        
+        try {
+            AircraftData data = new AircraftData(acData, acId);
+            double[][] chartAxis = data.getChartData(acId);
+            NumberAxis x = new NumberAxis(chartAxis[0][0], chartAxis[0][1], chartAxis[0][4]);
+            x.setLabel("Center of gravity-inches aft of datum");
+
+            NumberAxis y = new NumberAxis(chartAxis[0][2], chartAxis[0][3], chartAxis[0][5]);
+            y.setLabel("Weight-lbs");
+
+            LineChart<Number, Number> chartTemplat = new LineChart<>(x, y);
+            XYChart.Series envelope = new XYChart.Series<>();
+            
+            double[][] coordinates = data.getEnvelopeData(acId);
+            for (int i = 0; i < data.getCoordinateCount(acId); i++) {
+                envelope.getData().add(new XYChart.Data<>(coordinates[i][0], coordinates[i][1]));
+            }
+            
+            data = new AircraftData(acData, acId);
+            ArrayList<String> items = data.getFullItemList();
+            XYChart.Series<Number, Number> envelope2 = new XYChart.Series<>();
+            envelope2.getData().add(new XYChart.Data<>(Double.valueOf(values[items.indexOf("ZERO FUEL WEIGHT")][1]), Double.valueOf(values[items.indexOf("ZERO FUEL WEIGHT")][2])));
+            envelope2.getData().add(new XYChart.Data<>(Double.valueOf(values[items.indexOf("TAKE OFF WEIGHT")][1]), Double.valueOf(values[items.indexOf("TAKE OFF WEIGHT")][2])));
+            envelope2.getData().add(new XYChart.Data<>(Double.valueOf(values[items.indexOf("LANDING WEIGHT")][1]), Double.valueOf(values[items.indexOf("LANDING WEIGHT")][2])));
+            chartTemplat.getData().add(envelope);
+            chartTemplat.getData().add(envelope2);
+            chartTemplat.setCreateSymbols(false);
+            borderPane.setBottom(chartTemplat);
+        } catch (SQLException e) {
+            
+        }
+        showScene(borderPane);
+    }
+    
     public void redrawWBSheet() {
         BorderPane borderPane = new BorderPane();
+        
+        HBox top = topBar();
+        borderPane.setTop(top);
         redrawInputSheet();
+        BorderPane.setAlignment(grid, Pos.CENTER);
         borderPane.setCenter(grid);
         redrawEnvelope();
+        BorderPane.setAlignment(chartTemplate, Pos.CENTER);
         borderPane.setBottom(chartTemplate);
         showScene(borderPane);
     }
