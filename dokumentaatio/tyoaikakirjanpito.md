@@ -9,3 +9,6 @@ Päivä | Aika | Mitä tein?
 25.4 | 5 | Graafisen käyttöliittymän korjausta
 26.4 | 6 | Edellisen päivän jatko + Ui:n jaottelu metodeihin ja uuden tunnuksen luominen kuntoon
 27.4 | 6 | Testauksen lsiääminen, viikkotehtävien tekemistä
+2.4 | 6 | Flight login tallentamiseen liittyvien toimintojen kirjoittamine
+3.4 | 6 | Edellisen viimeistely + JavaDoc + testien kirjoittamista
+4.4 | 3 | Palautukset, dokumentaation päivitystä
