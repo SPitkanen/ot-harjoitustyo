@@ -17,6 +17,8 @@ Sovelluksen käyttäjä pystyy:
 
 [Käyttöohje](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
+[Testausdokumentti](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md)
+
 [Release 2](https://github.com/SPitkanen/ot-harjoitustyo/releases/tag/Viikko6)
 
 [Release 1](https://github.com/SPitkanen/ot-harjoitustyo/releases/tag/viikko5)
@@ -29,6 +31,12 @@ Sovelluksen käyttäjä pystyy:
 ## Tehtävät
 
 [Laskarit](https://github.com/SPitkanen/ot-harjoitustyo/tree/master/laskarit)
+
+## Viimeinen palautus
+
+Ohjelmaan on lisätty vielä viimeiseen palautukseen taulujen ja referenssikoneen luominen sillä oletuksella, että käyttäjä on luonnut tarvittavat tietokannat.
+
+Ohjelmaan jäi vielä jonkin verran hiomisen tarvetta, mutta se on toiminnallisuuksiltaan täysin toimiva.
 
 ## Viikko 6
 
