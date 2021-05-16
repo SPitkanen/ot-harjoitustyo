@@ -12,3 +12,6 @@ Päivä | Aika | Mitä tein?
 2.4 | 6 | Flight login tallentamiseen liittyvien toimintojen kirjoittamine
 3.4 | 6 | Edellisen viimeistely + JavaDoc + testien kirjoittamista
 4.4 | 3 | Palautukset, dokumentaation päivitystä
+14.4 | 3 | konfiguraation rakentamista
+15.4 | 7 | Edellisen päivän jatko, testauksen kasvatusta
+16.4 | 8 | Edellisten päivien työn viimeistelyö, dokumentaation kirjoittamista
