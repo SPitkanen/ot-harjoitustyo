@@ -28,10 +28,24 @@ Kaikki metodit siirtävät sovelluslogiikasta huolehtimisen paketin domain luokk
 Ohjelman sovelluslogiikka käsitellään pakkauksessa wbapp.domain ja se sisältää luokat lentokoneen datan käsittelyyn, käyttäjän datan käsittelyyn, sekä tuloksen käsittelyyn liittyvän luokan.
 
 * Aircraft vastaa lentokone-olion luomisesta, se saa id:n, tyypin ja rekisteritnnuksen
-* AircraftData vastaa lentokoneen datan käsittelystä. Yleisilmailukoneilla on massabalanssikaavakkeessa käytännössä kahdenlaisia rivejä. Rivit, jotka ovat samoja kaikille koneille (BASIC WEIGHT, ZERO FUEL WEIGHT, RAMP WEIGHT, TAKE OFF WEIGHT ja LANDING WEIGHT). Nämä säilyvät koneesta toiseen, tietysti yksittäiset arvot vaihtuvat sarakkeissa. Ne toimivat käytännössä laskennan lähtö -ja välivaiheina joihin koneesta toiseen muuttuvia arvoja lasketaan, näitä ovat esimerkiksi penkkirivien ja erilaisten tavaratilojen määrä (referenssikoneessa esim SEATS 1&2 jne). Sovelluksessa nämä rivit on tallennettu omiin tauluihinsa (acdata ja acdatadepend)
+* AircraftData vastaa lentokoneen datan käsittelystä. Yleisilmailukoneilla on massabalanssikaavakkeessa käytännössä kahdenlaisia rivejä. Rivit, jotka ovat samoja kaikille koneille (BASIC WEIGHT, ZERO FUEL WEIGHT, RAMP WEIGHT, TAKE OFF WEIGHT ja LANDING WEIGHT). Nämä säilyvät koneesta toiseen, tietysti yksittäiset arvot vaihtuvat sarakkeissa. Ne toimivat käytännössä laskennan lähtö -ja välivaiheina joihin koneesta toiseen muuttuvia arvoja lasketaan, näitä ovat esimerkiksi penkkirivien ja erilaisten tavaratilojen määrä (referenssikoneessa esim SEATS 1&2 jne). Sovelluksessa nämä rivit on tallennettu omiin tauluihinsa (acdata ja acdatadepend). Luokan AircraftData tehtävänä on siis käytännössä yhdistää näiden taulujen tiedot yhdeksi matriisiksi ja huolehtia tietojen muutoksista. Lisäksi luokka hoitaa koneen massakeskipisteen kuvaajan tieotjen käsittelystä.
+* AircraftList luo listan kaikista koneista valikkoa varten
+* Results huolehtii tallennettujen tulosten käsittelystä.
+* User hoitaa käyttäjätunnuksen ja salasanan tarkistamiset ja uuden käyttäjän luomisen. Se saa yhteyden tietokantaan parametrinaan luomisen yheydessä.
+* WBCalculator laskee saaduista listasta uudet arvot kaavakkeelle. Sille annetaan konstruktorin parametrina lista tietokannasta saaduista arvoista ja käyttäjän syötteistä, sekä rivimäärä. Aluksi lentokoneesta riippuvia vaiheita lasketaan yhteen ja "koneen lähdettyä liikkeelle" (RAMP WEIGHTin jälkeen) niitä aletaan vähentämään. Momentit ja varret pyöristetään kahden desimaalin tarkkuudelle. 
 
 luokkakaavio
 ![luokkakaavio](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Luokkakaavio.jpg)
 
 sekvenssikaavio sovelluksen käynnistymisestä
 ![sekvenssikaavio init](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/wbappInit.png)
+
+# Tietojen talletus
+
+Tiedot talletetaan Postgres tietokantaan. Tietokantaan on suoraan yhteydessä pakkaus dao. Yhteys tietokantaan luodaan heti sovelluksen käynnistyessä ja yhteys joko injektoidaan muille luokille tai sieltä haeutusta tiedosta muodostettu taulukko annetaan sellaisenaan luokan käsittelyyn.
+
+Tietokannan nimi on määritelty tiedostossa [db.txt](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/WeightAndBalance/config/db.txt). 
+
+# Vielä kehitettävää
+
+Sovellukseen jäi vähän toisteisuutta ja ResultSettien purkamista heti daossa olisi voinnut vielä harkita.
