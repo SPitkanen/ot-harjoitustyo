@@ -34,7 +34,6 @@ public class AircraftData {
             this.count = this.acData.getCount(planeId);
             this.count2 = this.acData.getCountDepend(planeId);
         } catch (SQLException e) {
-            System.out.println("Virhe: " + e);
         }
         this.items = new ArrayList<>();
         this.itemsAcDependant = new ArrayList<>();
@@ -65,7 +64,6 @@ public class AircraftData {
                 i++;
             }
         } catch (Exception e) {
-            System.out.println("Virhe: " + e);
         } 
     }
     
@@ -88,7 +86,6 @@ public class AircraftData {
                 i++;
             }
         } catch (Exception e) {
-            System.out.println("Virhe: " + e);
         }
     }
     
@@ -178,17 +175,22 @@ public class AircraftData {
     * 
     * @return chart values
     */
-    public double[][] getChartData(int planeId) throws SQLException {
-        ResultSet rs = acData.getChart(planeId);
+    public double[][] getChartData(int planeId) {
         double[][] chartData = new double[1][6];
-        while (rs.next()) {
-            chartData[0][0] = rs.getDouble("xstart");
-            chartData[0][1] = rs.getDouble("xstop");
-            chartData[0][2] = rs.getDouble("ystart");
-            chartData[0][3] = rs.getDouble("ystop");
-            chartData[0][4] = rs.getDouble("xspacing");
-            chartData[0][5] = rs.getDouble("yspacing");
+        try {
+            ResultSet rs = acData.getChart(planeId);
+            while (rs.next()) {
+                chartData[0][0] = rs.getDouble("xstart");
+                chartData[0][1] = rs.getDouble("xstop");
+                chartData[0][2] = rs.getDouble("ystart");
+                chartData[0][3] = rs.getDouble("ystop");
+                chartData[0][4] = rs.getDouble("xspacing");
+                chartData[0][5] = rs.getDouble("yspacing");
+            }
+        } catch (SQLException e) {
+            
         }
+        
         return chartData;
     }
     
@@ -201,19 +203,25 @@ public class AircraftData {
     * @return envelope limit values 
     *
     */
-    public double[][] getEnvelopeData(int planeId) throws SQLException {
-        ResultSet rs = acData.getEnvelope(planeId);
-        ResultSet rs2 = acData.getEnvelopeCount(planeId);
-        while (rs2.next()) {
-            coordinateCount = rs2.getInt("count");
+    public double[][] getEnvelopeData(int planeId) {
+        try {
+            ResultSet rs = acData.getEnvelope(planeId);
+            ResultSet rs2 = acData.getEnvelopeCount(planeId);
+            while (rs2.next()) {
+                coordinateCount = rs2.getInt("count");
+            }
+            int i = 0;
+            double[][] envelopeData = new double[coordinateCount][2];
+            while (rs.next()) {
+                envelopeData[i][0] = rs.getDouble("x");
+                envelopeData[i][1] = rs.getDouble("y");
+                i++;
+            }
+            return envelopeData;
+        } catch (SQLException e) {
+            
         }
-        int i = 0;
-        double[][] envelopeData = new double[coordinateCount][2];
-        while (rs.next()) {
-            envelopeData[i][0] = rs.getDouble("x");
-            envelopeData[i][1] = rs.getDouble("y");
-            i++;
-        }
+        double[][] envelopeData = new double[0][2];
         return envelopeData;
     }
     
@@ -233,7 +241,7 @@ public class AircraftData {
         return acData.saveData(dataList3, this.fullList, this.planeId, userId, getCount());
     }
     
-    public int getCoordinateCount(int planeId) throws SQLException {
+    public int getCoordinateCount(int planeId) {
         return coordinateCount;
     }
     

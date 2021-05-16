@@ -65,7 +65,7 @@ public class Ui extends Application {
         this.acList = new AircraftList(acData);
         
         calculator = new WBCalculator();
-        
+
         borderPane = new BorderPane();
     }
     
@@ -85,6 +85,11 @@ public class Ui extends Application {
         Scene newScene = new Scene(pane, 480, 640);
         this.primaryStage.setScene(newScene);
         this.primaryStage.show();
+        try {
+            
+        } catch (Exception e){
+            
+        }
     }
     
     public GridPane userInputScene() {
@@ -261,31 +266,27 @@ public class Ui extends Application {
     }
     
     public void redrawEnvelope() {
-        try {
-            double[][] chartAxis = data.getChartData(plane.getAcId());
-            NumberAxis x = new NumberAxis(chartAxis[0][0], chartAxis[0][1], chartAxis[0][4]);
-            x.setLabel("Center of gravity-inches aft of datum");
+        double[][] chartAxis = data.getChartData(plane.getAcId());
+        NumberAxis x = new NumberAxis(chartAxis[0][0], chartAxis[0][1], chartAxis[0][4]);
+        x.setLabel("Center of gravity-inches aft of datum");
 
-            NumberAxis y = new NumberAxis(chartAxis[0][2], chartAxis[0][3], chartAxis[0][5]);
-            y.setLabel("Weight-lbs");
+        NumberAxis y = new NumberAxis(chartAxis[0][2], chartAxis[0][3], chartAxis[0][5]);
+        y.setLabel("Weight-lbs");
 
-            chartTemplate = new LineChart<>(x, y);
-            XYChart.Series envelope = new XYChart.Series<>();
+        chartTemplate = new LineChart<>(x, y);
+        XYChart.Series envelope = new XYChart.Series<>();
             
-            double[][] coordinates = data.getEnvelopeData(plane.getAcId());
-            for (int i = 0; i < data.getCoordinateCount(plane.getAcId()); i++) {
-                envelope.getData().add(new XYChart.Data<>(coordinates[i][0], coordinates[i][1]));
-            }
-            XYChart.Series<Number, Number> envelope2 = new XYChart.Series<>();
-            envelope2.getData().add(new XYChart.Data<>(acDataList[items.indexOf("ZERO FUEL WEIGHT")][0], acDataList[items.indexOf("ZERO FUEL WEIGHT")][1]));
-            envelope2.getData().add(new XYChart.Data<>(acDataList[items.indexOf("TAKE OFF WEIGHT")][0], acDataList[items.indexOf("TAKE OFF WEIGHT")][1]));
-            envelope2.getData().add(new XYChart.Data<>(acDataList[items.indexOf("LANDING WEIGHT")][0], acDataList[items.indexOf("LANDING WEIGHT")][1]));
-            chartTemplate.getData().add(envelope);
-            chartTemplate.getData().add(envelope2);
-            chartTemplate.setCreateSymbols(false);
-        } catch (SQLException e) {
-            
+        double[][] coordinates = data.getEnvelopeData(plane.getAcId());
+        for (int i = 0; i < data.getCoordinateCount(plane.getAcId()); i++) {
+             envelope.getData().add(new XYChart.Data<>(coordinates[i][0], coordinates[i][1]));
         }
+        XYChart.Series<Number, Number> envelope2 = new XYChart.Series<>();
+        envelope2.getData().add(new XYChart.Data<>(acDataList[items.indexOf("ZERO FUEL WEIGHT")][0], acDataList[items.indexOf("ZERO FUEL WEIGHT")][1]));
+        envelope2.getData().add(new XYChart.Data<>(acDataList[items.indexOf("TAKE OFF WEIGHT")][0], acDataList[items.indexOf("TAKE OFF WEIGHT")][1]));
+        envelope2.getData().add(new XYChart.Data<>(acDataList[items.indexOf("LANDING WEIGHT")][0], acDataList[items.indexOf("LANDING WEIGHT")][1]));
+        chartTemplate.getData().add(envelope);
+        chartTemplate.getData().add(envelope2);
+        chartTemplate.setCreateSymbols(false);
     }
     
     public HBox topBar() {
@@ -359,36 +360,33 @@ public class Ui extends Application {
         }
         borderPane.setCenter(grid);
         
-        try {
-            AircraftData data = new AircraftData(acData, acId);
-            double[][] chartAxis = data.getChartData(acId);
-            NumberAxis x = new NumberAxis(chartAxis[0][0], chartAxis[0][1], chartAxis[0][4]);
-            x.setLabel("Center of gravity-inches aft of datum");
+        AircraftData data = new AircraftData(acData, acId);
+        double[][] chartAxis = data.getChartData(acId);
+        NumberAxis x = new NumberAxis(chartAxis[0][0], chartAxis[0][1], chartAxis[0][4]);
+        x.setLabel("Center of gravity-inches aft of datum");
 
-            NumberAxis y = new NumberAxis(chartAxis[0][2], chartAxis[0][3], chartAxis[0][5]);
-            y.setLabel("Weight-lbs");
+        NumberAxis y = new NumberAxis(chartAxis[0][2], chartAxis[0][3], chartAxis[0][5]);
+        y.setLabel("Weight-lbs");
 
-            LineChart<Number, Number> chartTemplat = new LineChart<>(x, y);
-            XYChart.Series envelope = new XYChart.Series<>();
+        LineChart<Number, Number> chartTemplat = new LineChart<>(x, y);
+        XYChart.Series envelope = new XYChart.Series<>();
             
-            double[][] coordinates = data.getEnvelopeData(acId);
-            for (int i = 0; i < data.getCoordinateCount(acId); i++) {
-                envelope.getData().add(new XYChart.Data<>(coordinates[i][0], coordinates[i][1]));
-            }
-            
-            data = new AircraftData(acData, acId);
-            ArrayList<String> items = data.getFullItemList();
-            XYChart.Series<Number, Number> envelope2 = new XYChart.Series<>();
-            envelope2.getData().add(new XYChart.Data<>(Double.valueOf(values[items.indexOf("ZERO FUEL WEIGHT")][1]), Double.valueOf(values[items.indexOf("ZERO FUEL WEIGHT")][2])));
-            envelope2.getData().add(new XYChart.Data<>(Double.valueOf(values[items.indexOf("TAKE OFF WEIGHT")][1]), Double.valueOf(values[items.indexOf("TAKE OFF WEIGHT")][2])));
-            envelope2.getData().add(new XYChart.Data<>(Double.valueOf(values[items.indexOf("LANDING WEIGHT")][1]), Double.valueOf(values[items.indexOf("LANDING WEIGHT")][2])));
-            chartTemplat.getData().add(envelope);
-            chartTemplat.getData().add(envelope2);
-            chartTemplat.setCreateSymbols(false);
-            borderPane.setBottom(chartTemplat);
-        } catch (SQLException e) {
-            
+        double[][] coordinates = data.getEnvelopeData(acId);
+        for (int i = 0; i < data.getCoordinateCount(acId); i++) {
+        envelope.getData().add(new XYChart.Data<>(coordinates[i][0], coordinates[i][1]));
         }
+            
+        data = new AircraftData(acData, acId);
+        ArrayList<String> items = data.getFullItemList();
+        XYChart.Series<Number, Number> envelope2 = new XYChart.Series<>();
+        envelope2.getData().add(new XYChart.Data<>(Double.valueOf(values[items.indexOf("ZERO FUEL WEIGHT")][1]), Double.valueOf(values[items.indexOf("ZERO FUEL WEIGHT")][2])));
+        envelope2.getData().add(new XYChart.Data<>(Double.valueOf(values[items.indexOf("TAKE OFF WEIGHT")][1]), Double.valueOf(values[items.indexOf("TAKE OFF WEIGHT")][2])));
+        envelope2.getData().add(new XYChart.Data<>(Double.valueOf(values[items.indexOf("LANDING WEIGHT")][1]), Double.valueOf(values[items.indexOf("LANDING WEIGHT")][2])));
+        chartTemplat.getData().add(envelope);
+        chartTemplat.getData().add(envelope2);
+        chartTemplat.setCreateSymbols(false);
+        borderPane.setBottom(chartTemplat);
+        
         showScene(borderPane);
     }
     

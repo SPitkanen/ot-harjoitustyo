@@ -34,14 +34,23 @@ public class AircraftDataTest {
     
     @Before
     public void setUp() {
-        try {
-            db = DriverManager.getConnection("jdbc:postgresql:wbtest");
-        } catch (SQLException e) {
-            System.out.println("Virhe tietokannassa");
-        }
+        Db conn = new Db();
+        db = conn.createConnection();
         data = new AircraftDataDao(db);
         acData = new AircraftData(data, 1);
         
+    }
+    
+    @Test
+    public void correctItemListFirst() {
+        String item = acData.getFullItemList().get(0);
+        assertEquals(item, "BASIC WEIGHT");
+    }
+    
+    @Test
+    public void correctItemListlast() {
+        String item = acData.getFullItemList().get(10);
+        assertEquals(item, "LANDING WEIGHT");
     }
     
     @Test
@@ -50,7 +59,7 @@ public class AircraftDataTest {
         assertEquals(c, 11);
     }
     
-    // Checking count for items that are not standard, but might depend on the aircraft selected
+    
     @Test
     public void correctCountAcDependant() {
         int c = acData.getCount2();
@@ -62,7 +71,7 @@ public class AircraftDataTest {
         acData.addWeights(40, 0);
         double list[][] = acData.getData();
         double x = list[0][1];
-        assertEquals(40, 40);
+        assertEquals(x, 40.0, 0.01);
     }
     
     @Test
@@ -81,6 +90,54 @@ public class AircraftDataTest {
     public void checkWeightWorksCorrectWeight() {
         boolean x = acData.checkWeight(30, 1);
         assertEquals(x, true);
+    }
+    
+    @Test
+    public void correctChartXstart() {
+        double[][] chart = acData.getChartData(1);
+        assertEquals(chart[0][0], 30, 0.01);
+    }
+    
+    @Test
+    public void correctChartXstop() {
+        double[][] chart = acData.getChartData(1);
+        assertEquals(chart[0][1], 38, 0.01);
+    }
+    
+    @Test
+    public void correctChartYstart() {
+        double[][] chart = acData.getChartData(1);
+        assertEquals(chart[0][2], 1000, 0.01);
+    }
+    
+    @Test
+    public void correctChartYstop() {
+        double[][] chart = acData.getChartData(1);
+        assertEquals(chart[0][3], 1800, 0.01);
+    }
+    
+    @Test
+    public void correctChartXspacing() {
+        double[][] chart = acData.getChartData(1);
+        assertEquals(chart[0][4], 2, 0.01);
+    }
+    
+    @Test
+    public void correctChartYspacing() {
+        double[][] chart = acData.getChartData(1);
+        assertEquals(chart[0][5], 100, 0.01);
+    }
+    
+    @Test
+    public void correctEnvelopeDataX() {
+        double[][] envelope = acData.getEnvelopeData(1);
+        assertEquals(envelope[4][0], 36.5, 0.01);
+    }
+    
+    @Test
+    public void correctEnvelopeDataY() {
+        double[][] envelope = acData.getEnvelopeData(1);
+        assertEquals(envelope[4][1], 1000, 0.01);
     }
 
     

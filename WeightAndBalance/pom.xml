@@ -77,6 +77,8 @@
                 <configuration>
                     <excludes>
                         <exclude>wbapp/ui/*</exclude>
+                        <exclude>com/mycompany/wandb/*</exclude>
+                        <exclude>default/*</exclude>
                     </excludes>
                 </configuration>
                 <executions>

@@ -31,11 +31,8 @@ public class UserTest {
     
     @Before
     public void setUp() {
-        try {
-            db = DriverManager.getConnection("jdbc:postgresql:wbtest");
-        } catch (SQLException e) {
-            System.out.println("Virhe tietokannassa");
-        }
+        Db conn = new Db();
+        db = conn.createConnection();
         
         UserDataDao usrData = new UserDataDao(db);
         user = new User(usrData);
@@ -44,48 +41,60 @@ public class UserTest {
     @Test
     public void loginWorkingExistingUser() {
         boolean b = user.login("user", "user");
-        assertEquals(true, true);
+        assertEquals(b, true);
     }
     
     @Test
     public void loginFailsNonExistingUsername() {
         boolean b = user.login("sdmvbsd", "user");
-        assertEquals(false, false);
+        assertEquals(b, false);
     }
     
     @Test
     public void loginFailsNonExistingPassword() {
         boolean b = user.login("user", "kshfghs");
-        assertEquals(false, false);
+        assertEquals(b, false);
     }
     
     @Test
     public void loginFailsNonExisting() {
         boolean b = user.login("skvjbs", "kshfghs");
-        assertEquals(false, false);
+        assertEquals(b, false);
     }
     
     @Test
     public void checkNameExistsTrue() throws SQLException {
         boolean b = user.checkNameExist("user");
-        assertEquals(true, true);
+        assertEquals(b, true);
     }
     
     @Test
     public void checkNameExistsFalse() throws SQLException {
         boolean b = user.checkNameExist("ksjdbvjk");
-        assertEquals(false, false);
+        assertEquals(b, false);
     }
     
     @Test
     public void checkPasswordExistsTrue() throws SQLException {
         boolean b = user.checkNameExist("user");
-        assertEquals(true, true);
+        assertEquals(b, true);
     }
     
     @Test
     public void checkPasswordExistsFalse() throws SQLException {
         boolean b = user.checkNameExist("ksjdbvjk");
-        assertEquals(false, false);
+        assertEquals(b, false);
+    }
+    
+    @Test
+    public void signupDoesNotWorkWithExistingUsername() {
+        boolean b = user.signup("user", "password");
+        assertEquals(b, false);
+    }
+    
+    @Test
+    public void signupDoesNotWorkWithExistingPassword() {
+        boolean b = user.signup("Username", "user");
+        assertEquals(b, false);
     }
 }

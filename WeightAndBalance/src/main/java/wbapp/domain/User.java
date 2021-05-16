@@ -104,7 +104,10 @@ public class User {
                 ResultSet rs = this.userdata.newUser(name, password);
                 rs.next();
                 int id = rs.getInt("id");
+                System.out.println(id);
                 if (id > 0) {
+                    this.userId = id;
+                    this.userName = name;
                     return true;
                 }
             } catch (SQLException e) {

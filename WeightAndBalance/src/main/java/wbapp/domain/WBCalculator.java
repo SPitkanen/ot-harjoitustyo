@@ -35,7 +35,7 @@ public class WBCalculator {
         double moment = this.data[0][2];
         for (int i = 1; i < count; i++) {
             if (i > 1 && this.data[i][4] == 0) {
-                //weight = Math.round(weight * 100) / 100;
+                weight = Math.round(weight * 100) / 100;
                 this.data[i][1] = weight;
                 this.data[i][2] = moment;
                 this.data[i][0] = calculateArm(weight, moment);
@@ -65,7 +65,7 @@ public class WBCalculator {
     *
     */
     public double calculateMoment(double arm, double weight) {
-        double moment = arm * weight / 100;
+        double moment = arm * weight / 100.0;
         double round = Math.round(moment * 100.0) / 100.0;
         return round;
     }
@@ -80,7 +80,7 @@ public class WBCalculator {
     *
     */
     public double calculateArm(double weight, double moment) {
-        double arm = moment * 100 / weight;
+        double arm = moment * 100.0 / weight;
         double round = Math.round(arm * 100.0) / 100.0;
         return round;
     }

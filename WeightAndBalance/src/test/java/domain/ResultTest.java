@@ -35,15 +35,60 @@ public class ResultTest {
     
     @Before
     public void setUp() {
-        try {
-            db = DriverManager.getConnection("jdbc:postgresql:wbtest");
-        } catch (SQLException e) {
-            System.out.println("Virhe tietokannassa");
-        }
+        Db conn = new Db();
+        db = conn.createConnection();
         data = new AircraftDataDao(db);
         acData = new AircraftData(data, 1);
         
         results = new Results(data, 1); 
+    }
+    
+    @Test
+    public void correctResultsRegister() {
+        String[][] result = results.getResults();
+        assertEquals(result[0][0], "OH-NNN");
+    }
+    
+    @Test
+    public void correctResultsDateShort() {
+        String[][] result = results.getResults();
+        assertEquals(result[0][1], "2021-05-02");
+    }
+    
+    @Test
+    public void correctResultsDatelong() {
+        String[][] result = results.getResults();
+        assertEquals(result[0][2], "2021-05-02T13:43:44.810114Z");
+    }
+    
+    @Test
+    public void correctResultsAircraftId() {
+        String[][] result = results.getResults();
+        assertEquals(result[0][3], "1");
+    }
+    
+    @Test
+    public void correctLogDataItem() {
+        String[][] data = results.getLogData("2021-05-02T13:43:44.810114Z", 1);
+        assertEquals(data[0][0], "BASIC WEIGHT");
+    }
+    
+    @Test
+    public void correctLogDataArm() {
+        String[][] data = results.getLogData("2021-05-02T13:43:44.810114Z", 1);
+        assertEquals(data[0][1], "31.4");
+    }
+    
+    @Test
+    public void correctLogDataWeight() {
+        String[][] data = results.getLogData("2021-05-02T13:43:44.810114Z", 1);
+        assertEquals(data[0][2], "1251.3");
+    }
+    
+    @Test
+    public void correctLogDataMoment() {
+        String[][] data = results.getLogData("2021-05-02T13:43:44.810114Z", 1);
+        assertEquals(data[0][3], "392.9");
     }
     
     @Test
@@ -54,12 +99,19 @@ public class ResultTest {
     
     @Test
     public void correctResultCount() {
-        results.resultCount(1);
+        int count = results.resultCount(1);
+        assertEquals(count, 1);
     }
     
     @Test
     public void getDataWorks() {
         String[][] items = results.getLogData("2021-05-02T13:43:44.810114Z", 1);
         assertEquals(items[1][0], "SEAT 1 & 2");
+    }
+    
+    @Test
+    public void shortenDate() {
+        String newDate = results.date("2021-05-02T13:43:44.810114Z");
+        assertEquals(newDate, "2021-05-02");
     }
 }
