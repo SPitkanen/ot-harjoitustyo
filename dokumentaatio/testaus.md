@@ -5,7 +5,7 @@ Mikäli testit suoritetaan ensimmäisen kerran, Db-luokka luo tietokantaan tarvi
 
 ## Testikattavuus
 
-Domain pakettiin keskittyvä haarautumiskattavuus on yhteensä 74%. 
+Sovelluslogiikan sisältävän domain pakettiin keskittyvä haarautumiskattavuus on yhteensä 74%. 
 ![Testikattavuus](https://github.com/SPitkanen/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/testikattavuus.png)
 Käyttöliittymä jätetään testeistä pois. Tietokantaan yhteydessä olevien metodien testaus jää rakenteesta johtuen tekemättä, niiden toimivuus tulee kuitenkin testattua välillisesti nykyisillä testeillä.
 
